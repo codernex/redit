@@ -1,0 +1,8 @@
+mutation LoginMutation($userName: String!, $password: String!) {
+  login(options: { userName: $userName, password: $password }) {
+    user {
+      userName
+      createdAt
+    }
+  }
+}
