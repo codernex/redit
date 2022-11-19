@@ -1,21 +1,13 @@
 import { Box, Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import React from 'react';
-import { gql, useMutation } from 'urql';
 import { InputField, Wrapper } from '../components';
+import { useRegisterMutation } from '../generated/graphql';
 
 interface RegisterProps {}
 
 const Register: React.FC<RegisterProps> = () => {
-  const REGISTER_MUT = gql`
-    mutation Mutation($userName: String!, $password: String!) {
-      createUser(options: { userName: $userName, password: $password }) {
-        userName
-      }
-    }
-  `;
-
-  const [, register] = useMutation(REGISTER_MUT);
+  const [, register] = useRegisterMutation();
 
   return (
     <Wrapper variant='small'>
@@ -29,7 +21,7 @@ const Register: React.FC<RegisterProps> = () => {
         }}
       >
         {({ values, isSubmitting }) => (
-          <Form>
+          <Form autoComplete='none'>
             <InputField
               label='UserName'
               name='userName'
